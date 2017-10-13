@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #000000;
+}
+
+li {
+    float: left;
+    border-right:1px solid #c0000;
+}
+
+li:last-child {
+    border-right: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    list-style-type: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #4da6ff;
+    color: black;
+}
+
+.active {
+    background-color: #4da6ff;
+    color: white;
+}
+h1 {
+	color : blue;
+	font-size: 30px;
+}
+</style>
+</head>
+<body>
+
+<ul>
+  <li><a href="index.html">Home</a></li>
+  <li><a  href="alcatraz.html">Alcatraz</a></li>
+  <li><a class="active" href="sweden.html">Sweden</a></li>
+  <li><a href="york.html">New York</a></li>
+</ul>
+
+<h1>My Favorite Places!</h1>
+
+<!-- this is where you can change the size of the map -->
+<div id="googleMap" style="width:400x;height:500px;"></div>
+<p> Sweden is sp pretty. The main reason why I want to go there is because of how beautiful 
+their country is. There is so much green and the buildings and sidewalks are so clean. Sweden
+known for their history, such medieval times and vikings. The people in Sweden are also 
+really nice, and also an internet celebrity named Felix Kjellberg or otherwise known as Pewdiepie
+was born their. I mainly want to visit their for how beautiful their country is with all 
+the green.</p>
+<img src="sd.jpg" align ="center" height ="300"><img src="sd2.jpg" align ="center" height ="300">
+
+
+
+<script>
+function myMap() {
+//latitude & longitude of where the map is centered
+//how zoomed in the map is
+//mapProp is a dictionary similar to how your css styles worked
+//west and south have negative values for latitude & longitude
+var mapCenter = new google.maps.LatLng(59.3293, 18.0686);
+var mapProp= {
+    center:mapCenter,
+    zoom:10,
+};
+//the map has to be created up here before you can add markers to it
+//notice that it's below mapProp because map needs mapProp to exist to work.
+var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+//alcatraz Island
+var alcatraz = new google.maps.LatLng(37.827100, -122.422844);
+//sweden
+var sweden = new google.maps.LatLng(59.3293, 18.0686);
+//new york 
+var york = new google.maps.LatLng(40.7589, -73.9851);
+
+//add some markers to the map for each spot
+//step 1: create the marker with a descriptive var name
+//the position is the LatLng object you created earlier
+var alcatrazMarker = new google.maps.Marker({position: alcatraz, icon:'markerface.png'});
+//step 2: add it to the map
+alcatrazMarker.setMap(map);
+var swedenMarker = new google.maps.Marker({position: sweden, icon: 'markerface.png'});
+swedenMarker.setMap(map);
+var yorkMarker = new google.maps.Marker({position: york, icon: 'markerface.png'});
+yorkMarker.setMap(map);
+
+//Example of a polyline
+var myTrip = [alcatraz,sweden,york];
+var flightPath = new google.maps.Polyline({
+  path:myTrip,
+  strokeColor:"#fcfc02",
+  strokeOpacity:0.8,
+  strokeWeight:2
+});
+//don't forget to add it to the map
+flightPath.setMap(map);
+
+
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?keyhttps://colbyv.github.io/gmap/.&callback=myMap"></script>
+
+</body>
+</html>
